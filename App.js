@@ -6,37 +6,153 @@
 
 import React, {Component} from 'react';
 import {
-    Platform,
-    StyleSheet,
-    Text,
-    View,
-    Image
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity
 } from 'react-native';
+import TabNavigator from 'react-native-tab-navigator';
 import Header from './src/component/header/header'
+import {scaleSize} from "./src/common/screenUtils";
+
+class Profile extends Component {
+  render() {
+    return (
+      <View>
+        <Text style={styles.welcome}>
+          Profile
+        </Text>
+      </View>
+    )
+  }
+}
+
+class Contacts extends Component {
+  render() {
+    return (
+      <View>
+        <Text style={styles.welcome}>
+          Contacts
+        </Text>
+      </View>
+    )
+  }
+}
+
+class Home extends Component {
+  render() {
+    return (
+      <View>
+        <Text style={styles.welcome}>
+          Home
+        </Text>
+      </View>
+    )
+  }
+}
+
 
 type Props = {};
 export default class App extends Component<Props> {
-    render() {
-        return (
-            <View style={styles.container}>
-               <Header></Header>
-                <View>
-                    <Text>商品</Text>
-                    <Text>评论</Text>
-                    <Text>商家</Text>
-                </View>
-            </View>
-        );
-    }
+  constructor(props) {
+    super(props)
+    this.state = {selectedTab: 'goods'}
+    this.changeTab = this.changeTab.bind(this)
+  }
+  changeTab(state) {
+    this.setState({
+      selectedTab: state
+    })
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Header></Header>
+        <View style={styles.nav}>
+          <TouchableOpacity
+            style={styles.navItem}
+            onPress={()=>{
+              this.changeTab('goods')
+            }}
+          >
+            <Text style={this.state.selectedTab== 'goods'? styles.selected :styles.navText}>商品</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navItem}
+            onPress={()=>{
+              this.changeTab('comment')
+            }}
+          >
+            <Text style={this.state.selectedTab== 'comment'? styles.selected :styles.navText}>评论</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navItem}
+            onPress={()=>{
+              this.changeTab('merchants')
+            }}
+          >
+            <Text style={this.state.selectedTab== 'merchants'? styles.selected :styles.navText}>商家</Text>
+          </TouchableOpacity>
+        </View>
+        <TabNavigator
+          style={styles.navTab}
+          tabBarStyle={{ height: 0, overflow: 'hidden' }}
+          sceneStyle={{ paddingBottom: 0 }}>
+          <TabNavigator.Item
+            selected={this.state.selectedTab === 'goods'}>
+            <Home />
+          </TabNavigator.Item>
+          <TabNavigator.Item
+            selected={this.state.selectedTab === 'comment'}>
+            <Contacts/>
+          </TabNavigator.Item>
+          <TabNavigator.Item
+            selected={this.state.selectedTab === 'merchants'}>
+            <Profile />
+          </TabNavigator.Item>
+        </TabNavigator>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    }
+  container: {
+    flex: 1,
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  nav: {
+    flexDirection: 'row',
+    height: scaleSize(80),
+    backgroundColor: '#fff'
+  },
+  navItem: {
+    flex: 1,
+  },
+  navText: {
+    fontSize: 14,
+    lineHeight: scaleSize(80),
+    textAlign: 'center',
+    color: 'rgb(77,85,93)',
+    includeFontPadding: false,
+  },
+  selected: {
+    fontSize: 14,
+    lineHeight: scaleSize(80),
+    textAlign: 'center',
+    color: 'rgb(240,20,20)',
+    includeFontPadding: false,
+  },
+  navTab: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ff0000',
+  }
 });
