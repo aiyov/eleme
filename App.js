@@ -34,9 +34,8 @@ class Contacts extends Component {
     render() {
         return (
             <View>
-                <Text style={styles.welcome}>
-                    Contacts
-                </Text>
+                <Text style={styles.one}>第一个</Text>
+                <Text style={styles.two}>第二个</Text>
             </View>
         )
     }
@@ -109,6 +108,18 @@ export default class App extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
+    one: {
+        width: 200,
+        height: 200,
+        backgroundColor: 'blue',
+        zIndex: 1,
+    },
+    two: {
+        width: 200,
+        height: 200,
+        marginTop: -50,
+        backgroundColor: 'yellow'
+    },
     container: {
         flex: 1,
     },
