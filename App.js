@@ -152,6 +152,5 @@ const styles = StyleSheet.create({
     },
     navTab: {
         flex: 1,
-        backgroundColor: '#ff0000',
     }
 });
