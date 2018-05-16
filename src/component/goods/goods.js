@@ -18,6 +18,27 @@ export default class Goods extends Component<props> {
                 <View style={styles.foodsItem}>
                     <FoodsItem/>
                 </View>
+                <CartControl />
+            </View>
+        )
+    }
+}
+
+class CartControl extends Component<props> {
+    render (){
+        return (
+            <View style={styles.shopcar}>
+                <View style={styles.contentLeft}>
+                    <Text>123</Text>
+                </View>
+                <View  style={styles.contentRight}>
+                   {/*<View style={styles.notEnough}>
+                       <Text style={styles.notEnoughText}>还差Y10元起送</Text>
+                   </View>*/}
+                    <View style={styles.enough}>
+                        <Text style={styles.enoughText}>去结算</Text>
+                    </View>
+                </View>
             </View>
         )
     }
@@ -235,5 +256,46 @@ const styles = StyleSheet.create({
         height: 1,
         backgroundColor: 'rgba(7,17,27,0.1)',
         marginHorizontal: scaleSize(36),
+    },
+    shopcar: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        height: 50,
+    },
+    contentLeft: {
+        flex: 1,
+        height: 50,
+        backgroundColor: '#141d27'
+    },
+    contentRight: {
+        width: 105,
+        height: 50,
+    },
+    notEnough: {
+        flex: 1,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#2b333b'
+    },
+    notEnoughText: {
+        fontSize: 12,
+        fontWeight: '700',
+        color: 'rgba(255,255,255,0.4)',
+    },
+    enough: {
+        flex: 1,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#00b43c'
+    },
+    enoughText: {
+        fontSize: 12,
+        fontWeight: '700',
+        color: 'rgba(255,255,255,1)',
     }
 })
